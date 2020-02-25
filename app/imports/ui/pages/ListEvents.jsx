@@ -1,13 +1,13 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader } from 'semantic-ui-react';
-import { Stuffs } from '/imports/api/stuff/Stuff';
-import StuffItem from '/imports/ui/components/StuffItem';
+import { Events } from '/imports/api/event/Events';
+import EventItem from '/imports/ui/components/EventItem';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-class ListStuff extends React.Component {
+class ListEvents extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
@@ -18,7 +18,7 @@ class ListStuff extends React.Component {
   renderPage() {
     return (
         <Container>
-          <Header as="h2" textAlign="center">List Stuff</Header>
+          <Header as="h2" textAlign="center">List Events</Header>
           <Table celled>
             <Table.Header>
               <Table.Row>
@@ -29,7 +29,7 @@ class ListStuff extends React.Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.props.stuffs.map((stuff) => <StuffItem key={stuff._id} stuff={stuff} />)}
+              {this.props.events.map((eventItem) => <EventItem key={eventItem._id} event={eventItem} />)}
             </Table.Body>
           </Table>
         </Container>
@@ -38,17 +38,17 @@ class ListStuff extends React.Component {
 }
 
 /** Require an array of Stuff documents in the props. */
-ListStuff.propTypes = {
-  stuffs: PropTypes.array.isRequired,
+ListEvents.propTypes = {
+  events: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe('Stuff');
+  const subscription = Meteor.subscribe('Events');
   return {
-    stuffs: Stuffs.find({}).fetch(),
+    events: Events.find({}).fetch(),
     ready: subscription.ready(),
   };
-})(ListStuff);
+})(ListEvents);
