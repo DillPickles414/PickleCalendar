@@ -8,13 +8,11 @@ const Events = new Mongo.Collection('Events');
 /** Define a schema to specify the structure of each document in the collection. */
 const EventSchema = new SimpleSchema({
   eventName: String,
-  quantity: Number,
+  dateStart: Date,
+  dateEnd: Date,
+  description: String,
+  summary: String,
   owner: String,
-  condition: {
-    type: String,
-    allowedValues: ['excellent', 'good', 'fair', 'poor'],
-    defaultValue: 'good',
-  },
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
