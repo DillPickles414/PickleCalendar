@@ -9,8 +9,8 @@ class EventItem extends React.Component {
     return (
         <Table.Row>
             <Table.Cell>{this.props.event.eventName}</Table.Cell>
-            <Table.Cell>{this.props.event.dateStart.toString()}</Table.Cell>
-            <Table.Cell>{this.props.event.dateEnd.toString()}</Table.Cell>
+            <Table.Cell>{this.props.event.dateStart.toLocaleString('en-US', { timeZone: 'UTC' })}</Table.Cell>
+            <Table.Cell>{this.props.event.dateEnd.toLocaleString('en-US', { timeZone: 'UTC' })}</Table.Cell>
             <Table.Cell>{this.props.event.description}</Table.Cell>
             <Table.Cell>{this.props.event.summary}</Table.Cell>
           <Table.Cell>
