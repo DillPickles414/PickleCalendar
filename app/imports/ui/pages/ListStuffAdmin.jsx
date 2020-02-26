@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader } from 'semantic-ui-react';
-import { Stuffs } from '/imports/api/stuff/Stuff';
+import { Events } from '/imports/api/event/Events';
 import StuffItemAdmin from '/imports/ui/components/StuffItemAdmin';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -29,7 +29,7 @@ class ListStuffAdmin extends React.Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.props.stuffs.map((stuff) => <StuffItemAdmin key={stuff._id} stuff={stuff} />)}
+              {this.props.events.map((eventItem) => <StuffItemAdmin key={eventItem._id} eventItem={eventItem} />)}
             </Table.Body>
           </Table>
         </Container>
@@ -39,7 +39,7 @@ class ListStuffAdmin extends React.Component {
 
 /** Require an array of Stuff documents in the props. */
 ListStuffAdmin.propTypes = {
-  stuffs: PropTypes.array.isRequired,
+  events: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -48,7 +48,7 @@ export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe('StuffAdmin');
   return {
-    stuffs: Stuffs.find({}).fetch(),
+    events: Events.find({}).fetch(),
     ready: subscription.ready(),
   };
 })(ListStuffAdmin);
