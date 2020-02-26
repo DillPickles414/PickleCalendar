@@ -8,9 +8,11 @@ class EventItem extends React.Component {
   render() {
     return (
         <Table.Row>
-          <Table.Cell>{this.props.event.eventName}</Table.Cell>
-          <Table.Cell>{this.props.event.quantity}</Table.Cell>
-          <Table.Cell>{this.props.event.condition}</Table.Cell>
+            <Table.Cell>{this.props.event.eventName}</Table.Cell>
+            <Table.Cell>{this.props.event.dateStart.toString()}</Table.Cell>
+            <Table.Cell>{this.props.event.dateEnd.toString()}</Table.Cell>
+            <Table.Cell>{this.props.event.description}</Table.Cell>
+            <Table.Cell>{this.props.event.summary}</Table.Cell>
           <Table.Cell>
             <Link to={`/edit/${this.props.event._id}`}>Edit</Link>
           </Table.Cell>
