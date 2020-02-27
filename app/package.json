@@ -6,6 +6,7 @@
     "classnames": "^2.2.6",
     "core-js": "^3.6.4",
     "graphql": "^14.6.0",
+    "ics-js": "^0.10.2",
     "meteor-node-stubs": "^0.4.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",

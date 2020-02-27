@@ -27,6 +27,7 @@ class ListEvents extends React.Component {
                 <Table.HeaderCell>End Date</Table.HeaderCell>
                 <Table.HeaderCell>Description</Table.HeaderCell>
                 <Table.HeaderCell>Summary</Table.HeaderCell>
+                <Table.HeaderCell>Download Link</Table.HeaderCell>
                 <Table.HeaderCell>Edit</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
