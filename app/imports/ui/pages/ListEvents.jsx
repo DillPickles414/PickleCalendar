@@ -28,6 +28,7 @@ class ListEvents extends React.Component {
                 <Table.HeaderCell>Description</Table.HeaderCell>
                 <Table.HeaderCell>Summary</Table.HeaderCell>
                 <Table.HeaderCell>Edit</Table.HeaderCell>
+                <Table.HeaderCell>Generate</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>

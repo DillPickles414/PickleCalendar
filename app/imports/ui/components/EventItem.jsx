@@ -13,9 +13,12 @@ class EventItem extends React.Component {
             <Table.Cell>{this.props.event.dateEnd.toLocaleString('en-US', { timeZone: 'UTC' })}</Table.Cell>
             <Table.Cell>{this.props.event.description}</Table.Cell>
             <Table.Cell>{this.props.event.summary}</Table.Cell>
-          <Table.Cell>
+            <Table.Cell>
             <Link to={`/edit/${this.props.event._id}`}>Edit</Link>
-          </Table.Cell>
+            </Table.Cell>
+            <Table.Cell>
+                <Link to={`/generate/${this.props.event._id}`}>Generate</Link>
+            </Table.Cell>
         </Table.Row>
     );
   }

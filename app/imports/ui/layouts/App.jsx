@@ -15,6 +15,7 @@ import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import CreateEvent from '../pages/CreateEvent';
+import ICSGenerator from '../components/ICSGenerator';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -30,7 +31,8 @@ class App extends React.Component {
               <ProtectedRoute path="/list" component={ListEvents}/>
               <ProtectedRoute path="/add" component={CreateEvent}/>
               <ProtectedRoute path="/edit/:_id" component={EditEvent}/>
-              <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
+              <ProtectedRoute path="/generate/:_id" component={ICSGenerator}/>
+                <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
             </Switch>
