@@ -25,6 +25,10 @@
     "plugin:meteor/recommended",
     "plugin:react/recommended"
   ],
+  "env": {
+  "browser": true,
+  "node": true
+  },
   "rules": {
     "arrow-parens": "off",
     "camelcase": "off",
