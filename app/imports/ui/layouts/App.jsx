@@ -16,6 +16,7 @@ import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import CreateEvent from '../pages/CreateEvent';
 import ICSGenerator from '../components/ICSGenerator';
+import UserProfile from '../pages/UserProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
