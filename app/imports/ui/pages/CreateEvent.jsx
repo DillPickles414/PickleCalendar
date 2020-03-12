@@ -19,19 +19,29 @@ const formSchema = new SimpleSchema({
 /** Renders the Page for adding a document. */
 class CreateEvent extends React.Component {
 
+    validateTiming(dateStart, dateEnd) {
+        return (dateStart < dateEnd)
+    }
+
     /** On submit, insert the data. */
     submit(data, formRef) {
         const { eventName, dateStart, dateEnd, description, summary } = data;
         const owner = Meteor.user().username;
-        Events.insert({ eventName, dateStart, dateEnd, description, summary, owner },
-            (error) => {
-                if (error) {
-                    swal('Error', error.message, 'error');
-                } else {
-                    swal('Success', 'Event added successfully', 'success');
-                    formRef.reset();
-                }
-            });
+        if (this.validateTiming(dateStart, dateEnd)) {
+            Events.insert({ eventName, dateStart, dateEnd, description, summary, owner },
+                (error) => {
+                    if (error) {
+                        swal('Error', error.message, 'error');
+                    } else {
+                        swal('Success', 'Event added successfully', 'success');
+                        formRef.reset();
+                    }
+                });
+        } else {
+            swal('Validation error', 'Start date should be strictly less than the end date.')
+        }
+
+
     }
 
     /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
