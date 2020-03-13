@@ -1,4 +1,3 @@
-
 function appendToEnd(original, append) {
     if (original === '') {
         return append;
@@ -6,7 +5,8 @@ function appendToEnd(original, append) {
     return original.concat(`\n${append}`);
 }
 
-function formatDate(date) {
+function formatDate(dateString) {
+    const date = new Date(dateString);
     let dateISO = date.toISOString();
     dateISO = dateISO.substr(0, dateISO.length - 4);
     return dateISO.replace(/[-.:]/g, '');
@@ -56,4 +56,4 @@ function generateEvent(data) {
     return event;
 }
 
-export { generateEvent };
+export { generateEvent, formatDate };
