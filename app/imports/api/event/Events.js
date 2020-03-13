@@ -10,6 +10,7 @@ const EventSchema = new SimpleSchema({
   eventName: String,
   dateStart: Date,
   dateEnd: Date,
+  frequency: String,
   description: String,
   summary: String,
   owner: String,

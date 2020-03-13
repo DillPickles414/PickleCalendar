@@ -38,10 +38,18 @@ function wrapCalendarTags(event) {
     return appendToEnd(wrapped, 'END:VCALENDAR');
 }
 
+function appendRecurrenceRule(data, event) {
+    if (data.frequency === 'ONCE') {
+        return event;
+    }
+    return appendToEnd(event, `RRULE:FREQ=${data.frequency}`);
+}
+
 function generateEvent(data) {
     let event = '';
     event = appendDescription(data, event);
     event = appendDates(data, event);
+    event = appendRecurrenceRule(data, event);
     event = appendSummary(data, event);
     event = wrapEventTags(event);
     event = wrapCalendarTags(event);

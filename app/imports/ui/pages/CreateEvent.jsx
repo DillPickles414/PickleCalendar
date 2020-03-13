@@ -1,7 +1,7 @@
 import React from 'react';
 import { Events } from '/imports/api/event/Events';
 import { Grid, Segment, Header } from 'semantic-ui-react';
-import { AutoForm, DateField, ErrorsField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, DateField, ErrorsField, SubmitField, TextField, SelectField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2';
@@ -12,6 +12,7 @@ const formSchema = new SimpleSchema({
     eventName: String,
     dateStart: Date,
     dateEnd: Date,
+    frequency: String,
     description: String,
     summary: String,
 });
@@ -20,15 +21,15 @@ const formSchema = new SimpleSchema({
 class CreateEvent extends React.Component {
 
     validateTiming(dateStart, dateEnd) {
-        return (dateStart < dateEnd)
+        return (dateStart < dateEnd);
     }
 
     /** On submit, insert the data. */
     submit(data, formRef) {
-        const { eventName, dateStart, dateEnd, description, summary } = data;
+        const { eventName, dateStart, dateEnd, frequency, description, summary } = data;
         const owner = Meteor.user().username;
         if (this.validateTiming(dateStart, dateEnd)) {
-            Events.insert({ eventName, dateStart, dateEnd, description, summary, owner },
+            Events.insert({ eventName, dateStart, dateEnd, frequency, description, summary, owner },
                 (error) => {
                     if (error) {
                         swal('Error', error.message, 'error');
@@ -38,7 +39,7 @@ class CreateEvent extends React.Component {
                     }
                 });
         } else {
-            swal('Validation error', 'Start date should be strictly less than the end date.')
+            swal('Validation error', 'Start date should be strictly less than the end date.');
         }
 
 
@@ -57,6 +58,8 @@ class CreateEvent extends React.Component {
                             <TextField name='eventName'/>
                             <DateField name='dateStart'/>
                             <DateField name='dateEnd'/>
+                            <SelectField name='frequency' allowedValues = {['ONCE', 'SECONDLY', 'MINUTELY', 'HOURLY',
+                                                                            'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY']}/>
                             <TextField name='description'/>
                             <TextField name='summary'/>
                             <SubmitField value='Submit'/>
