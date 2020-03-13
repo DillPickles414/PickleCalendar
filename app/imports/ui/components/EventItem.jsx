@@ -10,7 +10,7 @@ class EventItem extends React.Component {
         const element = document.createElement('a');
         const file = new Blob([generateEvent(this.props.event)], { type: 'text/plain' });
         element.href = URL.createObjectURL(file);
-        element.download = `${this.props.event._id}.ics`;
+        element.download = `${this.props.event.eventName}.ics`;
         element.click();
     };
 
