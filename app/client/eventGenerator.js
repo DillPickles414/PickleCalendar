@@ -45,11 +45,16 @@ function appendRecurrenceRule(data, event) {
     return appendToEnd(event, `RRULE:FREQ=${data.frequency}`);
 }
 
+function appendLocation(data, event) {
+    return appendToEnd(event, `LOCATION:${data.location}`);
+}
+
 function generateEvent(data) {
     let event = '';
     event = appendDescription(data, event);
     event = appendDates(data, event);
     event = appendRecurrenceRule(data, event);
+    event = appendLocation(data, event);
     event = appendSummary(data, event);
     event = wrapEventTags(event);
     event = wrapCalendarTags(event);

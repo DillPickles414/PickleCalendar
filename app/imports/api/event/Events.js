@@ -12,6 +12,7 @@ const EventSchema = new SimpleSchema({
   dateEnd: Date,
   frequency: String,
   description: String,
+  location: String,
   summary: String,
   owner: String,
 }, { tracker: Tracker });
