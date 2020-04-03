@@ -12,7 +12,7 @@ const testData = {
 
 
 describe('eventGenerator', function () {
-    it('output', function () {
+    it('generateEvent', function () {
 
         const event = testData;
         event.dateStart = new Date(event.dateStart());

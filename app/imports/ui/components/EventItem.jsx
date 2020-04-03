@@ -21,6 +21,7 @@ class EventItem extends React.Component {
             <Table.Cell>{this.props.event.dateStart.toLocaleString('en-US', { timeZone: 'UTC' })}</Table.Cell>
             <Table.Cell>{this.props.event.dateEnd.toLocaleString('en-US', { timeZone: 'UTC' })}</Table.Cell>
             <Table.Cell>{this.props.event.description}</Table.Cell>
+            <Table.Cell>{this.props.event.location}</Table.Cell>
             <Table.Cell>{this.props.event.summary}</Table.Cell>
             <Table.Cell textAlign='center'>
                 <Button as={ Link } to={`/edit/${this.props.event._id}`}>
