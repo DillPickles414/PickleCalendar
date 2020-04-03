@@ -18,18 +18,18 @@ const formSchema = new SimpleSchema({
     summary: String,
 });
 
+const validateTiming = function (dateStart, dateEnd) {
+    return dateStart < dateEnd;
+};
+
 /** Renders the Page for adding a document. */
 class CreateEvent extends React.Component {
-
-    validateTiming(dateStart, dateEnd) {
-        return (dateStart < dateEnd);
-    }
 
     /** On submit, insert the data. */
     submit(data, formRef) {
         const { eventName, dateStart, dateEnd, frequency, description, location, summary } = data;
         const owner = Meteor.user().username;
-        if (this.validateTiming(dateStart, dateEnd)) {
+        if (validateTiming(dateStart, dateEnd)) {
             Events.insert({ eventName, dateStart, dateEnd, frequency, description, location, summary, owner },
                 (error) => {
                     if (error) {
@@ -73,5 +73,5 @@ class CreateEvent extends React.Component {
         );
     }
 }
-
 export default CreateEvent;
+export { validateTiming };
