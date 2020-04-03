@@ -14,7 +14,8 @@ class EditEvent extends React.Component {
   /** On successful submit, insert the data. */
   submit(data) {
     const { eventName, dateStart, dateEnd, frequency, description, location, summary, _id } = data;
-    Events.update(_id, { $set: { eventName, dateStart, dateEnd, frequency, description, location, summary } }, (error) => (error ?
+    Events.update(_id, { $set: { eventName, dateStart, dateEnd, frequency, description, location, summary } },
+        (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   }
@@ -37,7 +38,7 @@ class EditEvent extends React.Component {
                 <DateField name='dateEnd' />
                 <SelectField name='frequency' allowedValues = {['ONCE', 'SECONDLY', 'MINUTELY', 'HOURLY',
                                                                 'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY']}/>
-                <TextField location='location'/>
+                <TextField name='location'/>
                 <TextField name='description'/>
                 <TextField name='summary'/>
                 <SubmitField value='Submit'/>

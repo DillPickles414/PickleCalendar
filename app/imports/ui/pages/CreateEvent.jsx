@@ -62,7 +62,7 @@ class CreateEvent extends React.Component {
                             <SelectField name='frequency' allowedValues = {['ONCE', 'SECONDLY', 'MINUTELY', 'HOURLY',
                                                                             'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY']}/>
                             <TextField name='description'/>
-                            <TextField location='location'/>
+                            <TextField name='location'/>
                             <TextField name='summary'/>
                             <SubmitField value='Submit'/>
                             <ErrorsField/>
