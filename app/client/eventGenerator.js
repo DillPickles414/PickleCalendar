@@ -46,7 +46,10 @@ function appendRecurrenceRule(data, event) {
 }
 
 function appendLocation(data, event) {
-    return appendToEnd(event, `LOCATION:${data.location}`);
+    if (data.location) {
+        return appendToEnd(event, `LOCATION:${data.location}`);
+    }
+    return event;
 }
 
 function generateEvent(data) {
