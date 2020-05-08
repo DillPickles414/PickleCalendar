@@ -12,6 +12,10 @@ const EventSchema = new SimpleSchema({
   dateEnd: Date,
   frequency: String,
   description: String,
+  rsvp: {
+    type: String,
+    optional: true
+  },
   location: String,
   summary: String,
   owner: String,
