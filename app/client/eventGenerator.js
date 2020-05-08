@@ -52,6 +52,12 @@ function appendLocation(data, event) {
     return event;
 }
 
+function appendPriority(data, event) {
+    if(data.priority){
+        return appendToEnd(event, `PRIORITY:${data.priority}`);
+    }
+}
+
 function appendRsvp(data, event) {
     console.log(data);
     if(data.rsvp && data.rsvp === "yes"){
@@ -66,6 +72,7 @@ function generateEvent(data) {
     event = appendDates(data, event);
     event = appendRecurrenceRule(data, event);
     event = appendRsvp(data, event);
+    event = appendPriority(data, event);
     event = appendLocation(data, event);
     event = appendSummary(data, event);
     event = wrapEventTags(event);
