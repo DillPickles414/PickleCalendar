@@ -41,21 +41,24 @@ const formSchema = new SimpleSchema({
     latitude: {
         type: Number,
         optional: true,
-        custom() {
-            if(this.latitude < -90 && this.latitude > 90)
-            this.validationContext.addValidationErrors([{
-                name: "latitude",
-                type: "notValid"
-            }]);
-
-            if(!this.longitude){
-                this.validationContext.addValidationErrors([{
-                    name: "latitude",
-                    type: "longNotSet"
-                }]);
+        min: -90,
+        max: 90,
+        custom: function () {
+            if (!this.field('longitude').isSet) {
+                return 'longitudeNotSet';
             }
         }
-
+    },
+    longitude: {
+        type: Number,
+        optional: true,
+        min: -180,
+        max: 180,
+        custom: function () {
+            if (!this.field('latitude').isSet) {
+                return 'latitudeNotSet';
+            }
+        }
     },
     description: String,
     location: String,
@@ -93,7 +96,9 @@ class CreateEvent extends React.Component {
                 },
                 (error) => {
                     if (error) {
-                        swal('Error', error.message, 'error');
+                        swal('Error', error.message, 'error').then(r => {
+                            console.log(r);
+                        })
                     } else {
                         swal('Success', 'Event added successfully', 'success');
                         formRef.reset();
@@ -129,7 +134,7 @@ class CreateEvent extends React.Component {
                             <SelectField name='rsvp' checkboxes allowedValues={['yes', 'no']}/>
                             <SelectField name='priority' allowedValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}/>
                             <TextField name='description'/>
-                            <Grid  container columns={3}>
+                            <Grid container columns={3}>
                                 <Grid.Row>
                                     <Grid.Column>
                                         <TextField name='location'/>

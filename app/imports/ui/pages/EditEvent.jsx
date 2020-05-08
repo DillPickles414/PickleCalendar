@@ -32,7 +32,7 @@ class EditEvent extends React.Component {
                     summary
                 }
             },
-            (error) => (error ?
+            (error) => ( error ?
                 swal('Error', error.message, 'error') :
                 swal('Success', 'Item updated successfully', 'success')));
     }

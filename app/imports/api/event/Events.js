@@ -46,17 +46,26 @@ const EventSchema = new SimpleSchema({
         min: -90,
         max: 90,
         custom: function() {
-            if (!this.longitude) {
-                console.log("AM I HERE!!!");
+            if (!this.field('longitude').isSet) {
                 return 'longitudeNotSet';
             }
         }
     },
     longitude: {
         type: Number,
-        optional: true
+        optional: true,
+        min: -180,
+        max: 180,
+        custom: function() {
+            if (!this.field('latitude').isSet) {
+                return 'latitudeNotSet';
+            }
+        }
     },
-    location: String,
+    location: {
+        type: String,
+        optional: true,
+    },
     summary: String,
     owner: String,
 }, {tracker: Tracker});
@@ -65,6 +74,7 @@ const EventSchema = new SimpleSchema({
 EventSchema.messageBox.messages({
     en: {
         longitudeNotSet: 'Longitude not set',
+        latitudeNotSet: 'latitude not set',
     },
 });
 

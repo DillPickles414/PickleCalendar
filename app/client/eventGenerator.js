@@ -67,10 +67,18 @@ function appendLocation(data, event) {
     return event;
 }
 
+function appendGeo(data, event) {
+    if(data.latitude && data.longitude){
+        return appendToEnd(event, `GEO:${data.latitude};${data.longitude}`)
+    }
+    return event;
+}
+
 function appendPriority(data, event) {
     if (data.priority) {
         return appendToEnd(event, `PRIORITY:${data.priority}`);
     }
+    return event;
 }
 
 function appendAttendee(data, event) {
@@ -94,6 +102,7 @@ function appendAttendee(data, event) {
 
 function generateEvent(data) {
     let event = '';
+    console.log(data);
     event = appendClassification(data, event);
     event = appendDescription(data, event);
     event = appendDates(data, event);
@@ -101,6 +110,7 @@ function generateEvent(data) {
     event = appendAttendee(data, event);
     event = appendPriority(data, event);
     event = appendLocation(data, event);
+    event = appendGeo(data, event);
     event = appendSummary(data, event);
     event = appendResources(data, event);
     event = wrapEventTags(event);
