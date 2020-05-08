@@ -13,6 +13,11 @@ const formSchema = new SimpleSchema({
     dateStart: Date,
     dateEnd: Date,
     frequency: String,
+    sentBy: {
+        type: String,
+        optional: true,
+        regEx: SimpleSchema.RegEx.EmailWithTLD
+    },
     rsvp: {
         type: String,
         optional: true
@@ -35,11 +40,12 @@ class CreateEvent extends React.Component {
 
     /** On submit, insert the data. */
     submit(data, formRef) {
-        const {eventName, dateStart, dateEnd, frequency, rsvp, priority, description, location, summary} = data;
+        const {eventName, sentBy, dateStart, dateEnd, frequency, rsvp, priority, description, location, summary} = data;
         const owner = Meteor.user().username;
         if (validateTiming(dateStart, dateEnd)) {
             Events.insert({
                     eventName,
+                    sentBy,
                     dateStart,
                     dateEnd,
                     frequency,
@@ -78,6 +84,7 @@ class CreateEvent extends React.Component {
                               onSubmit={data => this.submit(data, fRef)}>
                         <Segment>
                             <TextField name='eventName'/>
+                            <TextField name='sentBy'/>
                             <DateField name='dateStart'/>
                             <DateField name='dateEnd'/>
                             <SelectField name='frequency' allowedValues={['ONCE', 'SECONDLY', 'MINUTELY', 'HOURLY',

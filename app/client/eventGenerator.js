@@ -53,16 +53,27 @@ function appendLocation(data, event) {
 }
 
 function appendPriority(data, event) {
-    if(data.priority){
+    if (data.priority) {
         return appendToEnd(event, `PRIORITY:${data.priority}`);
     }
 }
 
-function appendRsvp(data, event) {
-    console.log(data);
-    if(data.rsvp && data.rsvp === "yes"){
-        return appendToEnd(event, 'ATTENDEE;RSVP=TRUE:mailto:'+data.owner);
+function appendAttendee(data, event) {
+    if (data.rsvp || data.sentBy) {
+        let attendee = 'ATTENDEE;'
+        if (data.sentBy) {
+            attendee += `SENT-BY=mailto:${data.sentBy};`
+        }
+        if (data.rsvp && data.rsvp === 'yes') {
+            attendee += `RSVP=TRUE:mailto:${data.owner}`
+        }
+
+        if (attendee.endsWith(";")) {
+            attendee = attendee.substring(0, attendee.length - 1);
+        }
+        return appendToEnd(event, attendee);
     }
+
     return event;
 }
 
@@ -71,7 +82,7 @@ function generateEvent(data) {
     event = appendDescription(data, event);
     event = appendDates(data, event);
     event = appendRecurrenceRule(data, event);
-    event = appendRsvp(data, event);
+    event = appendAttendee(data, event);
     event = appendPriority(data, event);
     event = appendLocation(data, event);
     event = appendSummary(data, event);
@@ -80,4 +91,4 @@ function generateEvent(data) {
     return event;
 }
 
-export { generateEvent, formatDate };
+export {generateEvent, formatDate};

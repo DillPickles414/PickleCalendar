@@ -13,10 +13,11 @@ class EditEvent extends React.Component {
 
     /** On successful submit, insert the data. */
     submit(data) {
-        const {eventName, dateStart, dateEnd, frequency, rsvp, priority, description, location, summary, _id} = data;
+        const {eventName, sentBy, dateStart, dateEnd, frequency, rsvp, priority, description, location, summary, _id} = data;
         Events.update(_id, {
                 $set: {
                     eventName,
+                    sentBy,
                     dateStart,
                     rsvp,
                     priority,
@@ -46,6 +47,7 @@ class EditEvent extends React.Component {
                     <AutoForm schema={EventSchema} onSubmit={data => this.submit(data)} model={this.props.doc}>
                         <Segment>
                             <TextField name='eventName'/>
+                            <TextField name='sentBy'/>
                             <DateField name='dateStart'/>
                             <DateField name='dateEnd'/>
                             <SelectField name='frequency' allowedValues={['ONCE', 'SECONDLY', 'MINUTELY', 'HOURLY',
