@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
 import { Events, EventSchema } from '/imports/api/event/Events';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, DateField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, DateField, SubmitField, TextField, SelectField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -13,8 +13,9 @@ class EditEvent extends React.Component {
 
   /** On successful submit, insert the data. */
   submit(data) {
-    const { eventName, dateStart, dateEnd, description, summary, _id } = data;
-    Events.update(_id, { $set: { eventName, dateStart, dateEnd, description, summary } }, (error) => (error ?
+    const { eventName, dateStart, dateEnd, frequency, description, location, summary, _id } = data;
+    Events.update(_id, { $set: { eventName, dateStart, dateEnd, frequency, description, location, summary } },
+        (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   }
@@ -35,6 +36,9 @@ class EditEvent extends React.Component {
                 <TextField name='eventName'/>
                 <DateField name='dateStart'/>
                 <DateField name='dateEnd' />
+                <SelectField name='frequency' allowedValues = {['ONCE', 'SECONDLY', 'MINUTELY', 'HOURLY',
+                                                                'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY']}/>
+                <TextField name='location'/>
                 <TextField name='description'/>
                 <TextField name='summary'/>
                 <SubmitField value='Submit'/>
