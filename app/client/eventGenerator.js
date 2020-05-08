@@ -52,11 +52,20 @@ function appendLocation(data, event) {
     return event;
 }
 
+function appendRsvp(data, event) {
+    console.log(data);
+    if(data.rsvp && data.rsvp === "yes"){
+        return appendToEnd(event, 'ATTENDEE;RSVP=TRUE:mailto:'+data.owner);
+    }
+    return event;
+}
+
 function generateEvent(data) {
     let event = '';
     event = appendDescription(data, event);
     event = appendDates(data, event);
     event = appendRecurrenceRule(data, event);
+    event = appendRsvp(data, event);
     event = appendLocation(data, event);
     event = appendSummary(data, event);
     event = wrapEventTags(event);
