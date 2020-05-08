@@ -11,6 +11,11 @@ const EventSchema = new SimpleSchema({
   dateStart: Date,
   dateEnd: Date,
   frequency: String,
+  sentBy: {
+    type: String,
+    optional: true,
+    regEx: SimpleSchema.RegEx.EmailWithTLD
+  },
   description: String,
   rsvp: {
     type: String,
