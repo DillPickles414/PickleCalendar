@@ -38,6 +38,25 @@ const formSchema = new SimpleSchema({
         type: String,
         optional: true
     },
+    latitude: {
+        type: Number,
+        optional: true,
+        custom() {
+            if(this.latitude < -90 && this.latitude > 90)
+            this.validationContext.addValidationErrors([{
+                name: "latitude",
+                type: "notValid"
+            }]);
+
+            if(!this.longitude){
+                this.validationContext.addValidationErrors([{
+                    name: "latitude",
+                    type: "longNotSet"
+                }]);
+            }
+        }
+
+    },
     description: String,
     location: String,
     summary: String,
@@ -52,7 +71,7 @@ class CreateEvent extends React.Component {
 
     /** On submit, insert the data. */
     submit(data, formRef) {
-        const {eventName, sentBy, dateStart, dateEnd, classification, frequency, rsvp, priority, resources, description, location, summary} = data;
+        const {eventName, sentBy, dateStart, dateEnd, classification, frequency, rsvp, priority, resources, description, location, latitude, longitude, summary} = data;
         const owner = Meteor.user().username;
         if (validateTiming(dateStart, dateEnd)) {
             Events.insert({
@@ -67,6 +86,8 @@ class CreateEvent extends React.Component {
                     resources,
                     description,
                     location,
+                    latitude,
+                    longitude,
                     summary,
                     owner
                 },
@@ -108,7 +129,19 @@ class CreateEvent extends React.Component {
                             <SelectField name='rsvp' checkboxes allowedValues={['yes', 'no']}/>
                             <SelectField name='priority' allowedValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}/>
                             <TextField name='description'/>
-                            <TextField name='location'/>
+                            <Grid  container columns={3}>
+                                <Grid.Row>
+                                    <Grid.Column>
+                                        <TextField name='location'/>
+                                    </Grid.Column>
+                                    <Grid.Column>
+                                        <TextField name='latitude'/>
+                                    </Grid.Column>
+                                    <Grid.Column>
+                                        <TextField name='longitude'/>
+                                    </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
                             <TextField name='summary'/>
                             <ListField name='resources' initialCount={0}/>
 

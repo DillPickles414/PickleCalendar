@@ -6,14 +6,14 @@ import {AutoForm, ErrorsField, DateField, SubmitField, TextField, SelectField, L
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
+import 'uniforms-bridge-simple-schema-2';
 
 /** Renders the Page for editing a single document. */
 class EditEvent extends React.Component {
 
     /** On successful submit, insert the data. */
     submit(data) {
-        const {eventName, sentBy, dateStart, dateEnd, classification, frequency, rsvp, priority, description, location, resources, summary, _id} = data;
+        const {eventName, sentBy, dateStart, dateEnd, latitude, longitude, classification, frequency, rsvp, priority, description, location, resources, summary, _id} = data;
         Events.update(_id, {
                 $set: {
                     eventName,
@@ -26,6 +26,8 @@ class EditEvent extends React.Component {
                     frequency,
                     description,
                     location,
+                    latitude,
+                    longitude,
                     resources,
                     summary
                 }
@@ -57,8 +59,19 @@ class EditEvent extends React.Component {
                                 'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY']}/>
                             <SelectField name='rsvp' checkboxes allowedValues={['yes', 'no']}/>
                             <SelectField name='priority' allowedValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}/>
-
-                            <TextField name='location'/>
+                            <Grid  container columns={3}>
+                                <Grid.Row>
+                                <Grid.Column>
+                                    <TextField name='location'/>
+                                </Grid.Column>
+                                <Grid.Column>
+                                    <TextField name='latitude'/>
+                                </Grid.Column>
+                                <Grid.Column>
+                                    <TextField name='longitude'/>
+                                </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
                             <TextField name='description'/>
                             <TextField name='summary'/>
                             <ListField name='resources' initialCount={0}/>
