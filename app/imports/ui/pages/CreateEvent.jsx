@@ -1,7 +1,7 @@
 import React from 'react';
 import {Events} from '../../api/event/Events';
 import {Grid, Segment, Header} from 'semantic-ui-react';
-import {AutoForm, DateField, ErrorsField, SubmitField, TextField, SelectField} from 'uniforms-semantic';
+import {AutoForm, DateField, ErrorsField, SubmitField, TextField, SelectField, ListField} from 'uniforms-semantic';
 import swal from 'sweetalert';
 import {Meteor} from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2';
@@ -30,6 +30,14 @@ const formSchema = new SimpleSchema({
         type: String,
         optional: true
     },
+    resources: {
+        type: Array,
+        optional: true
+    },
+    'resources.$': {
+        type: String,
+        optional: true
+    },
     description: String,
     location: String,
     summary: String,
@@ -44,7 +52,7 @@ class CreateEvent extends React.Component {
 
     /** On submit, insert the data. */
     submit(data, formRef) {
-        const {eventName, sentBy, dateStart, dateEnd, classification, frequency, rsvp, priority, description, location, summary} = data;
+        const {eventName, sentBy, dateStart, dateEnd, classification, frequency, rsvp, priority, resources, description, location, summary} = data;
         const owner = Meteor.user().username;
         if (validateTiming(dateStart, dateEnd)) {
             Events.insert({
@@ -56,6 +64,7 @@ class CreateEvent extends React.Component {
                     frequency,
                     rsvp,
                     priority,
+                    resources,
                     description,
                     location,
                     summary,
@@ -98,10 +107,11 @@ class CreateEvent extends React.Component {
 
                             <SelectField name='rsvp' checkboxes allowedValues={['yes', 'no']}/>
                             <SelectField name='priority' allowedValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}/>
-
                             <TextField name='description'/>
                             <TextField name='location'/>
                             <TextField name='summary'/>
+                            <ListField name='resources' initialCount={0}/>
+
                             <SubmitField value='Submit'/>
                             <ErrorsField/>
                         </Segment>
