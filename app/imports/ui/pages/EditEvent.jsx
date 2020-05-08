@@ -13,7 +13,7 @@ class EditEvent extends React.Component {
 
     /** On successful submit, insert the data. */
     submit(data) {
-        const {eventName, sentBy, dateStart, dateEnd, frequency, rsvp, priority, description, location, summary, _id} = data;
+        const {eventName, sentBy, dateStart, dateEnd, classification, frequency, rsvp, priority, description, location, summary, _id} = data;
         Events.update(_id, {
                 $set: {
                     eventName,
@@ -22,6 +22,7 @@ class EditEvent extends React.Component {
                     rsvp,
                     priority,
                     dateEnd,
+                    classification,
                     frequency,
                     description,
                     location,
@@ -48,6 +49,7 @@ class EditEvent extends React.Component {
                         <Segment>
                             <TextField name='eventName'/>
                             <TextField name='sentBy'/>
+                            <SelectField name='classification' allowedValues={['PUBLIC', 'PRIVATE', 'CONFIDENTIAL']}/>
                             <DateField name='dateStart'/>
                             <DateField name='dateEnd'/>
                             <SelectField name='frequency' allowedValues={['ONCE', 'SECONDLY', 'MINUTELY', 'HOURLY',
