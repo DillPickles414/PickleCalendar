@@ -12,7 +12,7 @@ class NavBar extends React.Component {
   render() {
     const menuStyle = { marginBottom: '10px' };
     return (
-      <Menu style={menuStyle} attached="top" borderless inverted>
+      <Menu style={menuStyle} color='green' attached="top" borderless inverted>
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
 
           <Image size='small' circular src="/images/icon.png"/>
