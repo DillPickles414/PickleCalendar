@@ -2,7 +2,7 @@ import React from 'react';
 import {Grid, Loader, Header, Segment} from 'semantic-ui-react';
 import {Events, EventSchema} from '/imports/api/event/Events';
 import swal from 'sweetalert';
-import {AutoForm, ErrorsField, DateField, SubmitField, TextField, SelectField} from 'uniforms-semantic';
+import {AutoForm, ErrorsField, DateField, SubmitField, TextField, SelectField, ListField} from 'uniforms-semantic';
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -13,7 +13,7 @@ class EditEvent extends React.Component {
 
     /** On successful submit, insert the data. */
     submit(data) {
-        const {eventName, sentBy, dateStart, dateEnd, classification, frequency, rsvp, priority, description, location, summary, _id} = data;
+        const {eventName, sentBy, dateStart, dateEnd, classification, frequency, rsvp, priority, description, location, resources, summary, _id} = data;
         Events.update(_id, {
                 $set: {
                     eventName,
@@ -26,6 +26,7 @@ class EditEvent extends React.Component {
                     frequency,
                     description,
                     location,
+                    resources,
                     summary
                 }
             },
@@ -60,6 +61,7 @@ class EditEvent extends React.Component {
                             <TextField name='location'/>
                             <TextField name='description'/>
                             <TextField name='summary'/>
+                            <ListField name='resources' initialCount={0}/>
                             <SubmitField value='Submit'/>
                             <ErrorsField/>
                         </Segment>

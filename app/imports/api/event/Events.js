@@ -29,6 +29,14 @@ const EventSchema = new SimpleSchema({
     type: String,
     optional: true
   },
+  resources: {
+    type: Array,
+    optional: true
+  },
+  'resources.$': {
+    type: String,
+    optional: true
+  },
   location: String,
   summary: String,
   owner: String,

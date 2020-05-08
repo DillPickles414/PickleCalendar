@@ -1,3 +1,4 @@
+
 function appendToEnd(original, append) {
     if (original === '') {
         return append;
@@ -19,6 +20,13 @@ function appendDescription(data, event) {
 function appendClassification(data, event) {
     if(data.classification) {
         return appendToEnd(event,`CLASS:${data.classification}`);
+    }
+    return event;
+}
+
+function appendResources(data, event) {
+    if(data.resources){
+           return appendToEnd(event, `RESOURCES:${data.resources.join(',')}`)
     }
     return event;
 }
@@ -94,6 +102,7 @@ function generateEvent(data) {
     event = appendPriority(data, event);
     event = appendLocation(data, event);
     event = appendSummary(data, event);
+    event = appendResources(data, event);
     event = wrapEventTags(event);
     event = wrapCalendarTags(event);
     return event;
