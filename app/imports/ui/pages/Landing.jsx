@@ -11,7 +11,7 @@ class Landing extends React.Component {
         <Grid verticalAlign='middle' textAlign='center' container>
 
           <Grid.Column width={7}>
-          <Image mid ='middle' circular src="https://png.pngtree.com/png-clipart/20200225/original/pngtree-march-calendar-2020-clipart-vector-png-element-png-image_5265098.jpg"/>
+          <Image mid ='middle' circular src="http://latestcalendar.com/wp-content/uploads/2020/03/Cute-May-2020-iPhone-Wallpaper.jpg"/>
         </Grid.Column>
 
 
