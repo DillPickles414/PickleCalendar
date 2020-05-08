@@ -17,6 +17,10 @@ const formSchema = new SimpleSchema({
         type: String,
         optional: true
     },
+    priority: {
+        type: String,
+        optional: true
+    },
     description: String,
     location: String,
     summary: String,
@@ -31,10 +35,21 @@ class CreateEvent extends React.Component {
 
     /** On submit, insert the data. */
     submit(data, formRef) {
-        const {eventName, dateStart, dateEnd, frequency, rsvp, description, location, summary} = data;
+        const {eventName, dateStart, dateEnd, frequency, rsvp, priority, description, location, summary} = data;
         const owner = Meteor.user().username;
         if (validateTiming(dateStart, dateEnd)) {
-            Events.insert({eventName, dateStart, dateEnd, frequency,rsvp, description, location, summary, owner},
+            Events.insert({
+                    eventName,
+                    dateStart,
+                    dateEnd,
+                    frequency,
+                    rsvp,
+                    priority,
+                    description,
+                    location,
+                    summary,
+                    owner
+                },
                 (error) => {
                     if (error) {
                         swal('Error', error.message, 'error');
@@ -69,6 +84,7 @@ class CreateEvent extends React.Component {
                                 'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY']}/>
 
                             <SelectField name='rsvp' checkboxes allowedValues={['yes', 'no']}/>
+                            <SelectField name='priority' allowedValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}/>
 
                             <TextField name='description'/>
                             <TextField name='location'/>

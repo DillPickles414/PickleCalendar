@@ -16,6 +16,10 @@ const EventSchema = new SimpleSchema({
     type: String,
     optional: true
   },
+  priority: {
+    type: String,
+    optional: true
+  },
   location: String,
   summary: String,
   owner: String,
