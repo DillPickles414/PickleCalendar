@@ -16,6 +16,13 @@ function appendDescription(data, event) {
     return appendToEnd(event, `DESCRIPTION:${data.description}`);
 }
 
+function appendClassification(data, event) {
+    if(data.classification) {
+        return appendToEnd(event,`CLASS:${data.classification}`);
+    }
+    return event;
+}
+
 function appendDates(data, event) {
     const date = [];
     date.push(`DTSTART:${formatDate(data.dateStart)}`);
@@ -79,6 +86,7 @@ function appendAttendee(data, event) {
 
 function generateEvent(data) {
     let event = '';
+    event = appendClassification(data, event);
     event = appendDescription(data, event);
     event = appendDates(data, event);
     event = appendRecurrenceRule(data, event);
