@@ -1,5 +1,7 @@
-.p-background-image {
+.pickle-background-image {
     background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTGavH8a9hoXZKQiLazMUGDOvP2xvdLvXGIwzhehjuXHjw8SDsi') no-repeat center center fixed;
     background-size: cover;
     color: white;
+    height: 100vh;
+    width: 100vh;
 }
